@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="x-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device=width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/stylesMobile.css" media="screen and (max-width: 480px)">
+	    <link rel="stylesheet" href="css/stylesDesktop.css" media="screen and (min-width: 480px)">
+		<title>RONY TOURS </title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awsome/5.14.0/css/all.min.css">
+	</head>
+	<body>
+	
+	<header>
+		<img src="images/RONy.jpg" height="130" width="170"> 
+		<a href="#" class="brand"> TRAVEL </a>
+		<div class="menu-btn"></div>
+		<div class="naviagation">
+			<div class="navigation-items">
+				<a href="index.html">Home</a>
+				<a href="About.html">About</a>
+				<a href="Explore.html">Explore</a>
+				<a href="Gallery.html">Gallery</a>
+				<a href="Contact.html">Contact</a>
+			</div>
+		</div>
+	</header>
+	
+	<section class="home">
+		<video class="video-slide active" src="images/Beach.mp4" autoplay muted loop></video>
+		<video class="video-slide" src="images/Heart.mp4" autoplay muted loop></video>
+		<video class="video-slide" src="images/Gari.mp4" autoplay muted loop></video>
+		<video class="video-slide" src="images/Sunset.mp4" autoplay muted loop></video>
+		<video class="video-slide" src="images/Maji.mp4" autoplay muted loop></video>
+		
+		<div class="content">
+			<h1> Beatiful Sceneries<br><span>Island</span></h1>
+			<p> At Rony's Tours, we invite you to embark on a journey to discover the breathtaking beauty of islands across the globe.
+			Islands are nature's jewels, each unique and captivating in its own way, offering a world of enchantment, adventure, and relaxation. 
+			Islands have an irresistible allure, where the land meets the sea in perfect harmony. The moment you step foot on these secluded pieces of paradise,
+			you'll be transported to a realm of pristine beaches, azure waters, lush tropical forests, and vibrant cultures. Whether you're seeking a tranquil escape,
+			an adrenaline-pumping adventure, or a cultural exploration, islands have it all. </p>
+			<a href="#">Read More</a>
+	 
+		</div>
+		<div class="media-icons">
+			<a href="#"> <i class="fab fa-facebook-f"></i></a>
+			<a href="#"> <i class="fab fa-instagram"></i></a>
+			<a href="#"> <i class="fab fa-twitter"></i></a>
+	</div>
+	<div class="slider-navigation">
+	  <div class="nav-btn active"></div>
+	  <div class="nav-btn"></div>
+	  <div class="nav-btn"></div>
+	  <div class="nav-btn"></div>
+	  <div class="nav-btn"></div>
+	  
+   </section> 
+   
+   <script type="text/javascript">
+   
+   const menuBtn = document.querySelector(".menu-btn");
+   const naviagation = document.querySelector(".navigation");
+ 
+   
+   menuBtn.addEventListener("click", () => {
+	menuBtn.classList.toggle("active");
+	menuBtn.classList.toggle("active");
+   });
+   
+   const btns = document.querySelectionAll(".nav-btn");
+   const slides = document.querySelectAll(".video-slide")
+   
+   var sliderNav = function(manual){
+	btns.forEach(btn) => {
+	  btn.classList.remove("active");
+   });
+   
+   btns[manual].classList.add("active");
+   slides[manual].classList.add("active");
+  }
+   
+   slides.forEach((slides) => {
+    btn.classList.remove("active");
+	});
+	
+	btns[manual].classList.add("active");
+	slides[manual].classList.add("active");
+   }
+   </script>
+	</body>
+</html>
