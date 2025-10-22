@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ronald Kipkemboi — Portfolio</title>
+    <meta name="description" content="Ronald Kipkemboi's personal website and portfolio. Web programmer, college athlete, and student at Shaw University." />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html">ronald kipkemboi</a>
+      <ul class="nav-list">
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="resume.html">files</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- hero -->
+      <header class="hero">
+        <div class="hero-inner">
+          <img src="assets/me.jpg" alt="Portrait of Ronald Kipkemboi" class="hero-pic">
+          <div>
+            <h1>hi, i’m <span class="accent">ronald kipkemboi</span></h1>
+            <p class="lede">
+              ronald kipkemboi is a student at shaw university,
+              an aspiring <span class="keyword">web programmer</span>, and a college athlete.
+              he has extensive experience in <span class="keyword">java</span>,
+              <span class="keyword">html</span>, and <span class="keyword">css</span>,
+              and maintains a portfolio at
+              <a href="https://ronygram-app.vercel.app" target="_blank" rel="noopener noreferrer" class="glow-link keyword">ronygram-app.vercel.app</a>.
+              fluent in <span class="keyword">english</span> and <span class="keyword">swahili</span>, he demonstrates
+              <span class="keyword">teamwork</span>, <span class="keyword">leadership</span>, and strong
+              <span class="keyword">work ethic</span> as a cross-country athlete, soccer coach, and fundraising officer.
+            </p>
+            <div class="cta">
+              <a class="btn primary" href="projects.html">see projects</a>
+              <a class="btn" href="resume.html">view resume</a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </main>
+
+    <!-- footer -->
+    <footer class="site-footer">
+      <ul class="contact-list">
+        <li><a href="https://github.com/ronaldkipkemboi" target="_blank" rel="noopener noreferrer" class="glow-link">github</a></li>
+        <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" rel="noopener noreferrer" class="glow-link">linkedin</a></li>
+        <li><a href="https://ronygram-app.vercel.app" target="_blank" rel="noopener noreferrer" class="glow-link">portfolio</a></li>
+        <li><a href="tel:+17575509047" class="glow-link">📞 +1 (757) 550-9047</a></li>
+      </ul>
+      <p>© 2025 ronald kipkemboi. all rights reserved.</p>
+
+      <div class="music-controls">
+        <button id="music-toggle" class="btn primary" type="button">play worship music</button>
+        <div class="volume-control">
+          <label for="volume-slider">volume:</label>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.6">
+        </div>
+      </div>
+    </footer>
+
+    <!-- background music -->
+    <audio id="bg-music" loop>
+      <source src="assets/Worship.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const music = document.getElementById("bg-music");
+      const toggle = document.getElementById("music-toggle");
+      const slider = document.getElementById("volume-slider");
+
+      music.volume = 0.6;
+      toggle.textContent = "play worship music";
+
+      toggle.addEventListener("click", () => {
+        if (music.paused) {
+          music.play().then(() => {
+            toggle.textContent = "pause worship music";
+          }).catch((e) => {
+            toggle.textContent = "music failed to play";
+          });
+        } else {
+          music.pause();
+          toggle.textContent = "play worship music";
+        }
+      });
+
+      slider.addEventListener("input", () => {
+        music.volume = slider.value;
+      });
+    </script>
+  </body>
+</html>

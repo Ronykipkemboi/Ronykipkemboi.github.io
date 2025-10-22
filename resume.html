@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>resume — ronald kipkemboi</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="brand" href="index.html">ronald kipkemboi</a>
+      <ul class="nav-list">
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="resume.html">files</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="section">
+      <h1>resume</h1>
+      <p>you can <span class="keyword">view</span> or <span class="keyword">download</span> my <span class="keyword">resume</span> below:</p>
+      <a class="btn primary" href="assets/resume.pdf" target="_blank">open resume</a>
+      <a class="btn" href="assets/resume.pdf" download>download pdf</a>
+      <h1>career connections</h1>
+      <p>you can <span class="keyword">view</span> or <span class="keyword">download</span> my <span class="keyword">certificate</span> below:</p>
+      <a class="btn primary" href="assets/certificate.png" target="_blank">open certificate</a>
+      <a class="btn" href="assets/certificate.png" download>download pdf</a>
+    </main>
+
+    <footer class="site-footer">
+      <ul class="contact-list">
+        <li><a href="https://github.com/ronaldkipkemboi" target="_blank" class="glow-link">github</a></li>
+        <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" class="glow-link">linkedin</a></li>
+        <li><a href="https://ronygram-app.vercel.app" target="_blank" class="glow-link">portfolio</a></li>
+        <li><a href="tel:+17575509047" class="glow-link">📞 +1 (757) 550-9047</a></li>
+      </ul>
+      <p>© 2025 ronald kipkemboi. all rights reserved.</p>
+
+      <div class="music-controls">
+        <button id="music-toggle" class="btn primary">play worship music</button>
+        <div class="volume-control">
+          <label for="volume-slider">volume:</label>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.6">
+        </div>
+      </div>
+    </footer>
+
+    <!-- background music -->
+    <audio id="bg-music" loop>
+      <source src="assets/Worship.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const music = document.getElementById("bg-music");
+      const toggle = document.getElementById("music-toggle");
+      const slider = document.getElementById("volume-slider");
+
+      music.volume = 0.6;
+      toggle.textContent = "play worship music";
+
+      toggle.addEventListener("click", () => {
+        if (music.paused) {
+          music.play();
+          toggle.textContent = "pause worship music";
+        } else {
+          music.pause();
+          toggle.textContent = "play worship music";
+        }
+      });
+
+      slider.addEventListener("input", () => {
+        music.volume = slider.value;
+      });
+    </script>
+  </body>
+</html>

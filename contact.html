@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>contact — ronald kipkemboi</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="nav">
+      <a class="brand" href="index.html">ronald kipkemboi</a>
+      <ul class="nav-list">
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="resume.html">resume</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- main content -->
+    <main class="section">
+      <h1>contact</h1>
+      <p>get in touch via email, phone, or the form below:</p>
+
+      <!-- contact info -->
+      <ul class="contact-list">
+        <li><a href="mailto:ronaldkemboi01@gmail.com" class="glow-link keyword">📧 ronaldkemboi01@gmail.com</a></li>
+        <li><a href="mailto:rkipkemboi446@bears.shawu.edu" class="glow-link keyword">📧 rkipkemboi446@bears.shawu.edu</a></li>
+        <li><a href="tel:+17575509047" class="glow-link keyword">📞 +1 (757) 550-9047</a></li>
+        <li><a href="https://github.com/ronaldkipkemboi" target="_blank" class="glow-link keyword">github</a></li>
+        <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" class="glow-link keyword">linkedin</a></li>
+        <li><a href="https://ronygram-app.vercel.app" target="_blank" class="glow-link keyword">portfolio</a></li>
+      </ul>
+
+      <!-- contact form -->
+      <form action="FORM_ENDPOINT_HERE" method="POST" class="contact-form">
+        <label>
+          <span class="keyword">name:</span>
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          <span class="keyword">email:</span>
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          <span class="keyword">message:</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn primary">send message</button>
+      </form>
+    </main>
+
+    <!-- footer -->
+    <footer class="site-footer">
+      <p>© 2025 ronald kipkemboi. all rights reserved.</p>
+
+      <div class="music-controls">
+        <button id="music-toggle" class="btn primary">play worship music</button>
+        <div class="volume-control">
+          <label for="volume-slider">volume:</label>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.6">
+        </div>
+      </div>
+    </footer>
+
+    <!-- background music -->
+    <audio id="bg-music" loop>
+      <source src="assets/Worship.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- scripts -->
+    <script>
+      const music = document.getElementById("bg-music");
+      const toggle = document.getElementById("music-toggle");
+      const slider = document.getElementById("volume-slider");
+
+      music.volume = 0.6;
+      toggle.textContent = "play worship music";
+
+      toggle.addEventListener("click", () => {
+        if (music.paused) {
+          music.play();
+          toggle.textContent = "pause worship music";
+        } else {
+          music.pause();
+          toggle.textContent = "play worship music";
+        }
+      });
+
+      slider.addEventListener("input", () => {
+        music.volume = slider.value;
+      });
+    </script>
+  </body>
+</html>
+
+ 

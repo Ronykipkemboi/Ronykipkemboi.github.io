@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>skills — ronald kipkemboi</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="brand" href="index.html">ronald kipkemboi</a>
+      <ul class="nav-list">
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="resume.html">files</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="section">
+      <h1>skills</h1>
+      <ul class="pill-list">
+        <li><span class="keyword">java</span></li>
+        <li><span class="keyword">html</span></li>
+        <li><span class="keyword">css</span></li>
+        <li><span class="keyword">javascript</span></li>
+        <li><span class="keyword">oracle sql</span></li>
+        <li><span class="keyword">postgresql</span></li>
+        <li><span class="keyword">git</span></li>
+        <li><span class="keyword">linux</span></li>
+      </ul>
+    </main>
+
+    <footer class="site-footer">
+      <ul class="contact-list">
+        <li><a href="https://github.com/ronaldkipkemboi" target="_blank" class="glow-link">github</a></li>
+        <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" class="glow-link">linkedin</a></li>
+        <li><a href="https://ronygram-app.vercel.app" target="_blank" class="glow-link">portfolio</a></li>
+        <li><a href="tel:+17575509047" class="glow-link">📞 +1 (757) 550-9047</a></li>
+      </ul>
+      <p>© 2025 ronald kipkemboi. all rights reserved.</p>
+
+      <div class="music-controls">
+        <button id="music-toggle" class="btn primary">play worship music</button>
+        <div class="volume-control">
+          <label for="volume-slider">volume:</label>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.6">
+        </div>
+      </div>
+    </footer>
+
+    <!-- background music -->
+    <audio id="bg-music" loop>
+      <source src="assets/Worship.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const music = document.getElementById("bg-music");
+      const toggle = document.getElementById("music-toggle");
+      const slider = document.getElementById("volume-slider");
+
+      music.volume = 0.6;
+      toggle.textContent = "play worship music";
+
+      toggle.addEventListener("click", () => {
+        if (music.paused) {
+          music.play();
+          toggle.textContent = "pause worship music";
+        } else {
+          music.pause();
+          toggle.textContent = "play worship music";
+        }
+      });
+
+      slider.addEventListener("input", () => {
+        music.volume = slider.value;
+      });
+    </script>
+  </body>
+</html>

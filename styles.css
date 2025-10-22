@@ -1,0 +1,292 @@
+:root {
+    --bg: #0b0c10;
+    --text: #e8e8ea;
+    --accent: #7c9cff;
+    --card: #171923;
+    --border: #262938;
+    --font: system-ui, sans-serif;
+  }
+  
+  /* base */
+  body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    padding-bottom: 60px; /* spacing for footer */
+  }
+  
+  /* layout containers */
+  header, .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  /* navbar */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-list a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  
+  .nav-list a:hover {
+    color: var(--accent);
+  }
+  
+  /* glowing brand name */
+  .brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--accent),
+                 0 0 10px var(--accent),
+                 0 0 20px var(--accent);
+    animation: glowPulse 2s infinite alternate;
+  }
+  
+  /* hero */
+  .hero {
+    padding: 60px 20px;
+  }
+  
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .hero-pic {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 10px rgba(124, 156, 255, 0.8),
+                0 0 20px rgba(124, 156, 255, 0.6);
+    animation: glowPulse 3s infinite alternate;
+    transition: transform 0.3s ease;
+  }
+  
+  .hero-pic:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (min-width: 768px) {
+    .hero-pic {
+      width: 130px;
+      height: 130px;
+    }
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .accent {
+    color: var(--accent);
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--accent),
+                 0 0 10px var(--accent);
+  }
+  
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  /* buttons */
+  .btn {
+    display: inline-block;
+    margin: 8px 4px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn.primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  }
+  
+  .btn.primary:hover {
+    transform: translateY(-2px);
+    background: #5a7dff;
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+  }
+  
+  /* grid layout */
+  .grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 10px;
+  }
+  
+  /* pill skills */
+  .pill-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+  }
+  
+  .pill-list li {
+    background: var(--card);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  
+  /* glowing inline links */
+  .glow-link {
+    color: var(--accent);
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--accent),
+                 0 0 10px var(--accent);
+  }
+  
+  .glow-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* dotted underline for keywords */
+  .keyword {
+    border-bottom: 1px dotted var(--accent);
+    cursor: help;
+  }
+  
+  /* footer */
+  .site-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  
+  .contact-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 0;
+    margin: 0 0 10px 0;
+  }
+  
+  .contact-list a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  
+  .contact-list a:hover {
+    color: var(--accent);
+  }
+  
+  /* music controls */
+  .music-controls {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    font-size: 14px;
+  }
+  
+  #volume-slider {
+    width: 150px;
+    accent-color: var(--accent);
+  }
+  
+  /* glowing animation */
+  @keyframes glowPulse {
+    from {
+      text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
+      box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+    }
+    to {
+      text-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+      box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+    }
+  }
+  
+  /* contact form */
+  .contact-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+  }
+  
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text);
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  
+  .contact-form button:hover {
+    transform: translateY(-2px);
+    background: #5a7dff;
+    box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent);
+  }
+  
+  
