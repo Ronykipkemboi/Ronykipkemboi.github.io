@@ -11,7 +11,9 @@
     }
   };
 
-  const storedTheme = localStorage.getItem("theme") || "dark";
+  const prefersLight = window.matchMedia?.("(prefers-color-scheme: light)").matches;
+  const storedTheme =
+    localStorage.getItem("theme") || (prefersLight ? "light" : "dark");
   applyTheme(storedTheme);
 
   if (themeToggle) {
@@ -26,6 +28,10 @@
     try {
       return JSON.parse(localStorage.getItem("accessibility")) || {};
     } catch (error) {
+      console.warn(
+        "Unable to load accessibility preferences. Using defaults.",
+        error,
+      );
       return {};
     }
   })();
@@ -53,6 +59,9 @@
     updateAccessibility();
   }
 
+  const particleCount = 70; // Total number of particles to render.
+  const particleDensityArea = 900; // Pixel area used for density calculations.
+
   if (window.tsParticles && document.getElementById("tsparticles")) {
     window.tsParticles.load("tsparticles", {
       background: { color: "transparent" },
@@ -69,7 +78,10 @@
           enable: true,
           speed: 0.6,
         },
-        number: { value: 70, density: { enable: true, area: 900 } },
+        number: {
+          value: particleCount,
+          density: { enable: true, area: particleDensityArea },
+        },
         opacity: { value: 0.6 },
         size: { value: { min: 1, max: 3 } },
       },
@@ -89,14 +101,19 @@
   const filterButtons = document.querySelectorAll("[data-filter]");
   const projectCards = document.querySelectorAll("[data-category]");
   if (filterButtons.length && projectCards.length) {
+    const cardCategories = new Map();
+    projectCards.forEach((card) => {
+      const categories = (card.dataset.category || "")
+        .split(",")
+        .map((value) => value.trim());
+      cardCategories.set(card, categories);
+    });
     const setFilter = (filter) => {
       filterButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.filter === filter);
       });
       projectCards.forEach((card) => {
-        const categories = (card.dataset.category || "")
-          .split(",")
-          .map((value) => value.trim());
+        const categories = cardCategories.get(card) || [];
         const match = filter === "All" || categories.includes(filter);
         card.style.display = match ? "flex" : "none";
       });
@@ -117,8 +134,10 @@
 
     let muted = false;
     let activeAudio = null;
+    let activeAudioUrl = null;
 
     const systemPrompt =
+      assistantWidget.dataset.systemPrompt ||
       "You are Ronald Kipkemboi, a CS Student-Athlete at Shaw University skilled in React, Java, and AV Tech.";
 
     const setWaveformState = (speaking) => {
@@ -135,64 +154,75 @@
       messages.scrollTop = messages.scrollHeight;
     };
 
+    const defaultAssistantMessage =
+      "I can help with frontend systems, React, and full-stack builds. Please reach out to connect live AI responses.";
+
     const fetchAssistantReply = async (text) => {
-      const apiKey =
-        window.OPENAI_API_KEY || localStorage.getItem("OPENAI_API_KEY");
-      if (!apiKey) {
-        return `I can help with frontend systems, React, and full-stack builds. Add your OpenAI key to continue live responses.`;
+      const endpoint = assistantWidget.dataset.chatEndpoint;
+      if (!endpoint) {
+        return defaultAssistantMessage;
       }
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: text },
-          ],
-        }),
-      });
+      let response;
+      try {
+        response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: text, system: systemPrompt }),
+        });
+      } catch (error) {
+        return "Unable to reach the assistant service. Please check your connection and try again.";
+      }
+      if (!response.ok) {
+        console.warn("Assistant service unavailable.", response.status);
+        return "Assistant service unavailable. Please try again shortly.";
+      }
       const data = await response.json();
       return (
-        data.choices?.[0]?.message?.content?.trim() ||
+        data.message?.trim() ||
         "Thanks for the message! I'm ready to help with frontend-focused full-stack work."
       );
     };
 
     const speakWithElevenLabs = async (text) => {
-      const voiceId = localStorage.getItem("ELEVENLABS_VOICE_ID");
-      const apiKey =
-        window.ELEVENLABS_API_KEY || localStorage.getItem("ELEVENLABS_API_KEY");
-      if (!voiceId || !apiKey || muted) {
+      const voiceId = assistantWidget.dataset.voiceId?.trim();
+      const endpoint = assistantWidget.dataset.voiceEndpoint;
+      if (!voiceId || !endpoint || muted) {
         return;
       }
       setWaveformState(true);
-      const response = await fetch(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        {
+      let response;
+      try {
+        response = await fetch(endpoint, {
           method: "POST",
-          headers: {
-            "xi-api-key": apiKey,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text,
-            model_id: "eleven_monolingual_v1",
-            voice_settings: { stability: 0.45, similarity_boost: 0.75 },
-          }),
-        },
-      );
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text, voiceId }),
+        });
+      } catch (error) {
+        setWaveformState(false);
+        return;
+      }
+      if (!response.ok) {
+        setWaveformState(false);
+        return;
+      }
       const audioBuffer = await response.arrayBuffer();
       const audioBlob = new Blob([audioBuffer], { type: "audio/mpeg" });
       const audioUrl = URL.createObjectURL(audioBlob);
       if (activeAudio) {
         activeAudio.pause();
+        if (activeAudioUrl) {
+          URL.revokeObjectURL(activeAudioUrl);
+        }
       }
+      activeAudioUrl = audioUrl;
       activeAudio = new Audio(audioUrl);
-      activeAudio.onended = () => setWaveformState(false);
+      activeAudio.onended = () => {
+        setWaveformState(false);
+        if (activeAudioUrl) {
+          URL.revokeObjectURL(activeAudioUrl);
+          activeAudioUrl = null;
+        }
+      };
       activeAudio.play();
     };
 

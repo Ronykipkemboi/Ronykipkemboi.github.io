@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>contact — ronald kipkemboi</title>
-    <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
   </head>
   <body>
@@ -58,8 +58,8 @@
         </label>
         <label>
           <span class="keyword">topic:</span>
-          <select name="topic" required>
-            <option value="">select a topic</option>
+          <select name="topic" required aria-label="Select a topic">
+            <option value="" disabled selected>-- select a topic --</option>
             <option value="frontend-collab">frontend collab</option>
             <option value="recruiting">recruiting</option>
             <option value="track-field">track &amp; field</option>

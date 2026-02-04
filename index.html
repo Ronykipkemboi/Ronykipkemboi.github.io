@@ -6,13 +6,13 @@
     <title>Ronald Kipkemboi — Portfolio</title>
     <meta name="description" content="Ronald Kipkemboi's personal website and portfolio. Web programmer, college athlete, and student at Shaw University." />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
   </head>
   <body>
@@ -192,7 +192,15 @@
       </div>
     </footer>
 
-    <section class="assistant-widget" aria-label="Digital twin assistant">
+    <!-- Voice synthesis requires a configured data-voice-id and /api/voice endpoint. -->
+    <section
+      class="assistant-widget"
+      aria-label="Digital twin assistant"
+      data-voice-id=""
+      data-chat-endpoint="/api/chat"
+      data-voice-endpoint="/api/voice"
+      data-system-prompt="You are Ronald Kipkemboi, a CS Student-Athlete at Shaw University skilled in React, Java, and AV Tech."
+    >
       <div class="assistant-card">
         <div class="assistant-header">
           <strong>Talk with Rony</strong>
@@ -204,13 +212,16 @@
         <div class="waveform muted" aria-hidden="true">
           <span></span><span></span><span></span><span></span><span></span>
         </div>
-      <div class="assistant-controls">
-        <input type="text" placeholder="Ask about React, APIs, or projects" data-assistant-input />
-        <button class="btn primary" type="button" data-assistant-send>Send</button>
+        <div class="assistant-controls">
+          <input type="text" placeholder="Ask about React, APIs, or projects" data-assistant-input />
+          <button class="btn primary" type="button" data-assistant-send>Send</button>
+        </div>
+        <details class="assistant-instructions" data-voice-ignore="true">
+          <summary class="lede">Developer setup</summary>
+          <p class="lede">Connect <span class="keyword">/api/chat</span> and <span class="keyword">/api/voice</span> serverless endpoints, then set <span class="keyword">data-voice-id</span> using your <span class="keyword">ELEVENLABS_VOICE_ID</span> from <span class="keyword">.env.example</span>.</p>
+        </details>
       </div>
-      <p class="lede" style="margin-top: 10px;">Set <span class="keyword">ELEVENLABS_VOICE_ID</span> and <span class="keyword">ELEVENLABS_API_KEY</span> in local storage for live voice.</p>
-    </div>
-  </section>
+    </section>
 
     <div class="accessibility-toolkit" aria-label="Accessibility tools">
       <button type="button" data-accessibility="high-contrast" aria-pressed="false">High Contrast</button>
