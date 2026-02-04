@@ -233,6 +233,20 @@
     width: 150px;
     accent-color: var(--accent);
   }
+
+  .voice-controls {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .voice-status {
+    font-size: 0.85rem;
+    color: var(--text);
+  }
   
   /* glowing animation */
   @keyframes glowPulse {
