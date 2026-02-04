@@ -32,9 +32,15 @@ jobs:
       - name: Prepare site
         run: |
           mkdir -p site
-          cp -R assets site/
+          if [ -d assets ]; then
+            cp -R assets site/
+          fi
           shopt -s nullglob
-          cp *.html styles.css site/
+          html_files=( *.html )
+          if [ ${#html_files[@]} -gt 0 ]; then
+            cp "${html_files[@]}" site/
+          fi
+          cp styles.css site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
