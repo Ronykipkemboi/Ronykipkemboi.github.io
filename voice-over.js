@@ -12,6 +12,18 @@
   const EXCLUDE_SELECTOR = "[data-voice-ignore]";
   let voiceActive = false;
 
+  const syncTypingText = () => {
+    const typingBlock = document.querySelector(".code-highlight");
+    if (!typingBlock) {
+      return;
+    }
+    const typingSource = typingBlock.querySelector(".typing-source");
+    const typingText = typingBlock.querySelector(".typing-text");
+    if (typingSource && typingText && !typingText.textContent.trim()) {
+      typingText.textContent = typingSource.textContent;
+    }
+  };
+
   const setVoiceState = (active, message) => {
     voiceActive = active;
     voiceToggle.textContent = active ? "Stop Voice Over" : "Start Voice Over";
@@ -37,6 +49,7 @@
       setVoiceState(false, "No main content found");
       return;
     }
+    syncTypingText();
     const readableElements = mainContent.querySelectorAll(
       READABLE_ELEMENTS_SELECTOR,
     );
@@ -62,6 +75,7 @@
     setVoiceState(true, "Voice over is on");
   };
 
+  syncTypingText();
   setVoiceState(false, "Voice over is off");
 
   voiceToggle.addEventListener("click", () => {
