@@ -35,13 +35,11 @@ jobs:
           if [ -d assets ]; then
             cp -R assets site/
           fi
-          shopt -s nullglob
-          for file in *.html; do
-            cp "$file" site/
-          done
-          shopt -u nullglob
-          if [ -f styles.css ]; then
-            cp styles.css site/
+          if ls *.html > /dev/null 2>&1; then
+            cp *.html site/
+          fi
+          if ls *.css > /dev/null 2>&1; then
+            cp *.css site/
           fi
 
       - name: Upload artifact
