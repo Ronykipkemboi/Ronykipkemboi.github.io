@@ -32,15 +32,7 @@ jobs:
       - name: Prepare site
         run: |
           mkdir -p site
-          if [ -d assets ]; then
-            cp -R assets site/
-          fi
-          if ls *.html > /dev/null 2>&1; then
-            cp *.html site/
-          fi
-          if ls *.css > /dev/null 2>&1; then
-            cp *.css site/
-          fi
+          rsync -a --exclude ".git/" --exclude ".github/" --exclude "site/" ./ site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
