@@ -1,4 +1,4 @@
-name: deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
           if [ ${#html_files[@]} -gt 0 ]; then
             cp "${html_files[@]}" site/
           fi
+          shopt -u nullglob
           if [ -f styles.css ]; then
             cp styles.css site/
           fi
