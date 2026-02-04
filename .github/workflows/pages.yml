@@ -35,10 +35,8 @@ jobs:
           if [ -d assets ]; then
             cp -R assets site/
           fi
-          html_found=false
           for file in *.html; do
             if [ -e "$file" ]; then
-              html_found=true
               cp "$file" site/
             fi
           done
