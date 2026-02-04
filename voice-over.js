@@ -20,7 +20,7 @@
       if (typingSource && typingText && !typingText.textContent.trim()) {
         const codeText = typingSource.textContent;
         typingText.textContent = codeText;
-        const typingSteps = typingText.dataset.typingSpeed || codeText.length;
+        const typingSteps = typingText.dataset.typingSteps || codeText.length;
         typingText.style.setProperty("--typing-steps", typingSteps);
       }
     });
