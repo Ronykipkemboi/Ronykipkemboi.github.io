@@ -9,7 +9,6 @@
     --card: #131826;
     --border: #253049;
     --code-highlight-min-height: 120px;
-    --code-highlight-chars: 123;
     --font: system-ui, sans-serif;
   }
   
@@ -322,13 +321,14 @@
     overflow: hidden;
     white-space: pre;
     width: 0;
+    min-width: 100%;
     border-right: 2px solid rgba(245, 247, 250, 0.6);
     min-height: var(--code-highlight-min-height);
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .typing-text {
-      animation: typing 4s steps(var(--code-highlight-chars), end) 0.4s forwards, blinkCaret 0.85s step-end infinite;
+      animation: typing 4s steps(var(--typing-steps, 60), end) 0.4s forwards, blinkCaret 0.85s step-end infinite;
     }
   }
 

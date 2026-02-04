@@ -13,15 +13,17 @@
   let voiceActive = false;
 
   const syncTypingText = () => {
-    const typingBlock = document.querySelector(".code-highlight");
-    if (!typingBlock) {
-      return;
-    }
-    const typingSource = typingBlock.querySelector(".typing-source");
-    const typingText = typingBlock.querySelector(".typing-text");
-    if (typingSource && typingText && !typingText.textContent.trim()) {
-      typingText.textContent = typingSource.textContent;
-    }
+    const typingBlocks = document.querySelectorAll(".code-highlight");
+    typingBlocks.forEach((typingBlock) => {
+      const typingSource = typingBlock.querySelector(".typing-source");
+      const typingText = typingBlock.querySelector(".typing-text");
+      if (typingSource && typingText && !typingText.textContent.trim()) {
+        const codeText = typingSource.textContent;
+        typingText.textContent = codeText;
+        const speed = typingText.dataset.typingSpeed || codeText.length;
+        typingText.style.setProperty("--typing-steps", speed);
+      }
+    });
   };
 
   const setVoiceState = (active, message) => {
