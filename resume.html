@@ -4,9 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>resume — ronald kipkemboi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
   </head>
   <body>
+    <div id="tsparticles" class="particles-bg" aria-hidden="true"></div>
     <nav class="nav">
       <a class="brand" href="index.html">ronald kipkemboi</a>
       <ul class="nav-list">
@@ -15,6 +23,12 @@
         <li><a href="resume.html">files</a></li>
         <li><a href="contact.html">contact</a></li>
       </ul>
+      <div class="theme-toggle" data-voice-ignore="true">
+        <span>theme</span>
+        <button class="toggle-button" type="button" data-theme-toggle aria-label="Toggle light mode">
+          <span>🌙</span>
+        </button>
+      </div>
     </nav>
 
     <main class="section">
@@ -33,7 +47,6 @@
         <li><a href="https://github.com/rony288" target="_blank" class="glow-link">github</a></li>
         <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" class="glow-link">linkedin</a></li>
         <li><a href="https://ronygram-app.vercel.app" target="_blank" class="glow-link">portfolio</a></li>
-        <li><a href="tel:+17575509047" class="glow-link">📞 +1 (757) 550-9047</a></li>
       </ul>
       <p>© 2025 Ronald Kipkemboi. All rights reserved.</p>
 
@@ -78,6 +91,12 @@
       });
 
     </script>
+    <div class="accessibility-toolkit" aria-label="Accessibility tools">
+      <button type="button" data-accessibility="high-contrast" aria-pressed="false">High Contrast</button>
+      <button type="button" data-accessibility="large-text" aria-pressed="false">Large Text</button>
+      <button type="button" data-accessibility="reduce-motion" aria-pressed="false">Reduce Motion</button>
+    </div>
     <script src="voice-over.js"></script>
+    <script src="site.js"></script>
   </body>
 </html>

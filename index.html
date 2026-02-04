@@ -6,9 +6,17 @@
     <title>Ronald Kipkemboi — Portfolio</title>
     <meta name="description" content="Ronald Kipkemboi's personal website and portfolio. Web programmer, college athlete, and student at Shaw University." />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
   </head>
   <body>
+    <div id="tsparticles" class="particles-bg" aria-hidden="true"></div>
     <!-- navbar -->
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="index.html">ronald kipkemboi</a>
@@ -18,6 +26,12 @@
         <li><a href="resume.html">files</a></li>
         <li><a href="contact.html">contact</a></li>
       </ul>
+      <div class="theme-toggle" data-voice-ignore="true">
+        <span>theme</span>
+        <button class="toggle-button" type="button" data-theme-toggle aria-label="Toggle light mode">
+          <span>🌙</span>
+        </button>
+      </div>
     </nav>
 
     <main>
@@ -48,14 +62,20 @@
       <section class="section">
         <div class="section-heading">
           <h2>code highlight</h2>
-          <p class="lede">A quick Java snapshot that mirrors my backend-first approach.</p>
+          <p class="lede">A React snapshot that mirrors the digital twin experience.</p>
         </div>
-        <div class="code-highlight" aria-label="Java code snippet highlighting object-oriented design">
-          <div class="code-highlight-header">java / hello world</div>
-          <pre><code class="language-java"><span class="sr-only typing-source">public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, world!");
-    }
+        <div class="code-highlight" aria-label="React code snippet highlighting frontend systems">
+          <div class="code-highlight-header">react / digital twin widget</div>
+          <pre><code class="language-jsx"><span class="sr-only typing-source">export default function DigitalTwin() {
+  const [mode, setMode] = useState("dark");
+  return (
+    &lt;section className="glass-panel"&gt;
+      &lt;h2&gt;Talk with Rony&lt;/h2&gt;
+      &lt;button onClick={() =&gt; setMode(mode === "dark" ? "light" : "dark")}&gt;
+        Toggle {mode === "dark" ? "Light" : "Dark"}
+      &lt;/button&gt;
+    &lt;/section&gt;
+  );
 }</span><span class="typing-text" aria-hidden="true"></span></code></pre>
         </div>
       </section>
@@ -80,6 +100,74 @@
           </article>
         </div>
       </section>
+
+      <section class="section glass-panel">
+        <div class="section-heading">
+          <h2>ronygram spotlight</h2>
+          <p class="lede">A front-row look at my flagship full-stack React build.</p>
+        </div>
+        <div class="split-section">
+          <div class="media-placeholder">Video demo / GIF placeholder</div>
+          <div>
+            <h3>RonyGram</h3>
+            <p>Social storytelling platform with realtime updates, global state management, and a clean mobile-first UI.</p>
+            <ul class="pill-list">
+              <li>React</li>
+              <li>Vercel</li>
+              <li>Global State</li>
+            </ul>
+            <a class="btn primary" href="https://ronygram-app.vercel.app" target="_blank" rel="noopener noreferrer">View Live</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <h2>student-athlete timeline</h2>
+          <p class="lede">Milestones that blend engineering growth with competitive track &amp; field wins.</p>
+        </div>
+        <div class="timeline glass-panel">
+          <div class="timeline-item">
+            <span class="timeline-tag">Tech</span>
+            <h3>Built RonyGram</h3>
+            <p>Delivered a full-stack photo sharing experience with realtime state updates and cloud deployment.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-tag">Athletics</span>
+            <h3>Track Scholarship</h3>
+            <p>Earned a scholarship through consistent performance in the 400m and 800m events.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-tag">Tech</span>
+            <h3>AV Tech Lead</h3>
+            <p>Managed live event signal flow, ensuring reliability while training new technicians.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-tag">Athletics</span>
+            <h3>Conference Finalist</h3>
+            <p>Placed in conference finals while balancing capstone software projects.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <h2>thoughts &amp; technical insights</h2>
+          <p class="lede">Latest writing on applied AI and full-stack product thinking.</p>
+        </div>
+        <div class="thoughts-grid">
+          <article class="card">
+            <h3>AI API Probability</h3>
+            <p>How probabilistic reasoning shapes reliable API integrations in production.</p>
+            <a class="glow-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
+          </article>
+          <article class="card">
+            <h3>Gemini 1.5</h3>
+            <p>Key takeaways from exploring Gemini 1.5 and multi-modal model capabilities.</p>
+            <a class="glow-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
+          </article>
+        </div>
+      </section>
     </main>
 
     <!-- footer -->
@@ -88,7 +176,6 @@
         <li><a href="https://github.com/rony288" target="_blank" rel="noopener noreferrer" class="glow-link">github</a></li>
         <li><a href="https://linkedin.com/in/ronaldkipkemboi" target="_blank" rel="noopener noreferrer" class="glow-link">linkedin</a></li>
         <li><a href="https://ronygram-app.vercel.app" target="_blank" rel="noopener noreferrer" class="glow-link">portfolio</a></li>
-        <li><a href="tel:+17575509047" class="glow-link">📞 +1 (757) 550-9047</a></li>
       </ul>
       <p>© 2025 Ronald Kipkemboi. All rights reserved.</p>
 
@@ -104,6 +191,43 @@
         <span id="voice-status" class="voice-status" aria-live="polite">Voice over is off</span>
       </div>
     </footer>
+
+    <!-- Voice synthesis requires a configured data-voice-id and /api/voice endpoint. -->
+    <section
+      class="assistant-widget"
+      aria-label="Digital twin assistant"
+      data-voice-id=""
+      data-chat-endpoint="/api/chat"
+      data-voice-endpoint="/api/voice"
+      data-system-prompt="You are Ronald Kipkemboi, a CS Student-Athlete at Shaw University skilled in React, Java, and AV Tech."
+    >
+      <div class="assistant-card">
+        <div class="assistant-header">
+          <strong>Talk with Rony</strong>
+          <button class="btn" type="button" data-voice-toggle aria-pressed="false">Mute</button>
+        </div>
+        <div class="assistant-messages" data-assistant-messages>
+          <div class="assistant-bubble assistant">Hi! I’m Rony’s digital twin. Ask about frontend systems or projects.</div>
+        </div>
+        <div class="waveform muted" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="assistant-controls">
+          <input type="text" placeholder="Ask about React, APIs, or projects" data-assistant-input />
+          <button class="btn primary" type="button" data-assistant-send>Send</button>
+        </div>
+        <details class="assistant-instructions" data-voice-ignore="true">
+          <summary class="lede">Developer setup</summary>
+          <p class="lede">Connect <span class="keyword">/api/chat</span> and <span class="keyword">/api/voice</span> serverless endpoints, then set <span class="keyword">data-voice-id</span> using your <span class="keyword">ELEVENLABS_VOICE_ID</span> from <span class="keyword">.env.example</span>.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="accessibility-toolkit" aria-label="Accessibility tools">
+      <button type="button" data-accessibility="high-contrast" aria-pressed="false">High Contrast</button>
+      <button type="button" data-accessibility="large-text" aria-pressed="false">Large Text</button>
+      <button type="button" data-accessibility="reduce-motion" aria-pressed="false">Reduce Motion</button>
+    </div>
 
     <!-- background music -->
     <audio id="bg-music" loop>
@@ -137,5 +261,6 @@
 
     </script>
     <script src="voice-over.js"></script>
+    <script src="site.js"></script>
   </body>
 </html>
