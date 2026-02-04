@@ -20,12 +20,13 @@
       if (typingSource && typingText && !typingText.textContent.trim()) {
         const codeText = typingSource.textContent;
         typingText.textContent = codeText;
-        const typingSteps = typingText.dataset.typingSteps
-          || codeText.replace(/\s/g, "").length;
+        const typingSteps = typingText.dataset.typingSteps || codeText.length;
         typingText.style.setProperty("--typing-steps", typingSteps);
       }
     });
   };
+
+  populateTypingContent();
 
   const setVoiceState = (active, message) => {
     voiceActive = active;
@@ -78,7 +79,6 @@
     setVoiceState(true, "Voice over is on");
   };
 
-  populateTypingContent();
   setVoiceState(false, "Voice over is off");
 
   voiceToggle.addEventListener("click", () => {

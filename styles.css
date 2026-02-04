@@ -329,7 +329,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .typing-text {
-      animation: typing var(--typing-duration) steps(var(--typing-steps, var(--typing-default-steps)), end) 0.4s forwards,
+      animation: typing var(--typing-duration) steps(var(--typing-steps, var(--typing-default-steps)), end) forwards,
         blinkCaret 0.85s step-end infinite;
     }
   }
