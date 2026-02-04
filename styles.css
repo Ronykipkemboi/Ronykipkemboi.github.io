@@ -1,9 +1,16 @@
 :root {
-    --bg: #0b0c10;
-    --text: #e8e8ea;
-    --accent: #7c9cff;
-    --card: #171923;
-    --border: #262938;
+    --bg: #0a0c12;
+    --text: #f5f7fa;
+    --accent: #1f6feb;
+    --accent-rgb: 31, 111, 235;
+    --accent-glow: rgba(var(--accent-rgb), 0.4);
+    --accent-glow-strong: rgba(var(--accent-rgb), 0.45);
+    --accent-glow-bright: rgba(var(--accent-rgb), 0.6);
+    --card: #131826;
+    --border: #253049;
+    --code-highlight-min-height: 120px;
+    --typing-duration: 4s;
+    --typing-default-steps: 60;
     --font: system-ui, sans-serif;
   }
   
@@ -30,6 +37,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
   .nav-list {
@@ -38,6 +47,7 @@
     gap: 16px;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap;
   }
   
   .nav-list a {
@@ -73,6 +83,21 @@
     gap: 20px;
     flex-wrap: wrap;
   }
+
+  .hero-text {
+    max-width: 560px;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    color: rgba(245, 247, 250, 0.85);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
   
   .hero-pic {
     width: 110px;
@@ -99,6 +124,27 @@
   
   h1 {
     font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    margin-bottom: 8px;
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .lede {
+    color: rgba(245, 247, 250, 0.78);
+    font-size: 1.05rem;
   }
   
   .accent {
@@ -129,13 +175,13 @@
     background: var(--accent);
     color: white;
     border: none;
-    box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
   }
   
   .btn.primary:hover {
     transform: translateY(-2px);
-    background: #5a7dff;
-    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+    background: #1a5cd6;
+    box-shadow: 0 0 16px var(--accent-glow-strong);
   }
   
   /* grid layout */
@@ -149,6 +195,13 @@
     background: var(--card);
     padding: 16px;
     border-radius: 10px;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, border 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border);
   }
   
   /* pill skills */
@@ -164,6 +217,128 @@
     background: var(--card);
     padding: 6px 12px;
     border-radius: 999px;
+  }
+
+  .skills-dashboard {
+    display: grid;
+    gap: 20px;
+  }
+
+  .skill-group {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .skill-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .skill-item {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) 2fr;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.95rem;
+  }
+
+  .skill-meter {
+    width: 100%;
+    height: 8px;
+    background: rgba(245, 247, 250, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .skill-meter span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #3ea6ff);
+    border-radius: 999px;
+  }
+
+  .projects-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .project-card .btn {
+    align-self: flex-start;
+  }
+
+  .highlight-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .code-highlight {
+    background: #0f1422;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    font-family: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 0.95rem;
+    color: #d4e2ff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .code-highlight-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(245, 247, 250, 0.7);
+    margin-bottom: 12px;
+  }
+
+  .code-highlight pre {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  .code-highlight code {
+    display: block;
+    min-height: var(--code-highlight-min-height);
+  }
+
+  .typing-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: pre;
+    width: 0;
+    border-right: 2px solid rgba(245, 247, 250, 0.6);
+    min-height: var(--code-highlight-min-height);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .typing-text {
+      animation: typing var(--typing-duration) steps(var(--typing-steps, var(--typing-default-steps)), end) 0.4s forwards,
+        blinkCaret 0.85s step-end infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-text {
+      width: auto;
+      border-right: none;
+    }
   }
   
   /* glowing inline links */
@@ -252,11 +427,49 @@
   @keyframes glowPulse {
     from {
       text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
-      box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow-strong);
     }
     to {
-      text-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
-      box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+      text-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent);
+      box-shadow: 0 0 16px var(--accent-glow-bright);
+    }
+  }
+
+  @keyframes blinkCaret {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (min-width: 900px) {
+    .hero-inner {
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .skill-item {
+      grid-template-columns: 1fr;
     }
   }
   

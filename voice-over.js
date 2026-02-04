@@ -12,6 +12,22 @@
   const EXCLUDE_SELECTOR = "[data-voice-ignore]";
   let voiceActive = false;
 
+  const populateTypingContent = () => {
+    const typingBlocks = document.querySelectorAll(".code-highlight");
+    typingBlocks.forEach((typingBlock) => {
+      const typingSource = typingBlock.querySelector(".typing-source");
+      const typingText = typingBlock.querySelector(".typing-text");
+      if (typingSource && typingText && !typingText.textContent.trim()) {
+        const codeText = typingSource.textContent;
+        typingText.textContent = codeText;
+        const effectiveTypingSteps = typingText.dataset.typingSteps || codeText.length;
+        typingText.style.setProperty("--typing-steps", effectiveTypingSteps);
+      }
+    });
+  };
+
+  populateTypingContent();
+
   const setVoiceState = (active, message) => {
     voiceActive = active;
     voiceToggle.textContent = active ? "Stop Voice Over" : "Start Voice Over";
@@ -37,6 +53,7 @@
       setVoiceState(false, "No main content found");
       return;
     }
+    populateTypingContent();
     const readableElements = mainContent.querySelectorAll(
       READABLE_ELEMENTS_SELECTOR,
     );
