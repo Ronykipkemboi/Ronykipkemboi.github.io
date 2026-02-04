@@ -323,14 +323,14 @@
     overflow: hidden;
     white-space: pre;
     width: 0;
-    min-width: 100%;
     border-right: 2px solid rgba(245, 247, 250, 0.6);
     min-height: var(--code-highlight-min-height);
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .typing-text {
-      animation: typing var(--typing-duration) steps(var(--typing-steps, var(--typing-default-steps)), end) 0.4s forwards, blinkCaret 0.85s step-end infinite;
+      animation: typing var(--typing-duration) 0.4s steps(var(--typing-steps, var(--typing-default-steps)), end) forwards,
+        blinkCaret 0.85s step-end infinite;
     }
   }
 
