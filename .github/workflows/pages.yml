@@ -37,9 +37,7 @@ jobs:
           fi
           shopt -s nullglob
           for file in *.html; do
-            if [ -e "$file" ]; then
-              cp "$file" site/
-            fi
+            cp "$file" site/
           done
           shopt -u nullglob
           if [ -f styles.css ]; then
