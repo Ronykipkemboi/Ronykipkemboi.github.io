@@ -12,7 +12,7 @@
   const EXCLUDE_SELECTOR = "[data-voice-ignore]";
   let voiceActive = false;
 
-  const syncTypingText = () => {
+  const populateTypingContent = () => {
     const typingBlocks = document.querySelectorAll(".code-highlight");
     typingBlocks.forEach((typingBlock) => {
       const typingSource = typingBlock.querySelector(".typing-source");
@@ -52,7 +52,7 @@
       setVoiceState(false, "No main content found");
       return;
     }
-    syncTypingText();
+    populateTypingContent();
     const readableElements = mainContent.querySelectorAll(
       READABLE_ELEMENTS_SELECTOR,
     );
@@ -78,7 +78,7 @@
     setVoiceState(true, "Voice over is on");
   };
 
-  syncTypingText();
+  populateTypingContent();
   setVoiceState(false, "Voice over is off");
 
   voiceToggle.addEventListener("click", () => {
