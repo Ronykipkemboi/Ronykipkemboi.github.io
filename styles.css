@@ -2,6 +2,10 @@
     --bg: #0a0c12;
     --text: #f5f7fa;
     --accent: #1f6feb;
+    --accent-rgb: 31, 111, 235;
+    --accent-glow: rgba(var(--accent-rgb), 0.4);
+    --accent-glow-strong: rgba(var(--accent-rgb), 0.45);
+    --accent-glow-bright: rgba(var(--accent-rgb), 0.6);
     --card: #131826;
     --border: #253049;
     --font: system-ui, sans-serif;
@@ -168,13 +172,13 @@
     background: var(--accent);
     color: white;
     border: none;
-    box-shadow: 0 0 12px rgba(31, 111, 235, 0.4);
+    box-shadow: 0 0 12px var(--accent-glow);
   }
   
   .btn.primary:hover {
     transform: translateY(-2px);
     background: #1a5cd6;
-    box-shadow: 0 0 16px rgba(31, 111, 235, 0.45);
+    box-shadow: 0 0 16px var(--accent-glow-strong);
   }
   
   /* grid layout */
@@ -420,11 +424,11 @@
   @keyframes glowPulse {
     from {
       text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
-      box-shadow: 0 0 8px rgba(31, 111, 235, 0.45);
+      box-shadow: 0 0 8px var(--accent-glow-strong);
     }
     to {
       text-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent);
-      box-shadow: 0 0 16px rgba(31, 111, 235, 0.6);
+      box-shadow: 0 0 16px var(--accent-glow-bright);
     }
   }
 
