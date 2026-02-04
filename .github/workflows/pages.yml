@@ -40,7 +40,9 @@ jobs:
           if [ ${#html_files[@]} -gt 0 ]; then
             cp "${html_files[@]}" site/
           fi
-          cp styles.css site/
+          if [ -f styles.css ]; then
+            cp styles.css site/
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
