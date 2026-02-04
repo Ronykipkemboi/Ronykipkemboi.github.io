@@ -35,9 +35,11 @@ jobs:
           if [ -d assets ]; then
             cp -R assets site/
           fi
-          if compgen -G "*.html" > /dev/null; then
-            cp *.html site/
-          fi
+          for file in *.html; do
+            if [ -e "$file" ]; then
+              cp "$file" site/
+            fi
+          done
           if [ -f styles.css ]; then
             cp styles.css site/
           fi
