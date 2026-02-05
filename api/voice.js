@@ -16,20 +16,41 @@ const readJsonBody = async (req) => {
   }
 };
 
+const DEFAULT_VOICE_ID = "N4vsgxqr2U3I2wHhBa9m";
+
 const sendJson = (res, statusCode, payload) => {
   res.statusCode = statusCode;
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(payload));
 };
 
-const setCorsHeaders = (res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+const resolveAllowedOrigin = (req) => {
+  const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  if (!allowedOrigins.length) {
+    return "";
+  }
+  const requestOrigin = req.headers.origin;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+  return allowedOrigins[0];
+};
+
+const setCorsHeaders = (req, res) => {
+  const allowedOrigin = resolveAllowedOrigin(req);
+  if (allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Vary", "Origin");
+  }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 };
 
 module.exports = async (req, res) => {
-  setCorsHeaders(res);
+  setCorsHeaders(req, res);
   if (req.method === "OPTIONS") {
     res.statusCode = 204;
     res.end();
@@ -45,12 +66,15 @@ module.exports = async (req, res) => {
   const text = typeof body.text === "string" ? body.text.trim() : "";
   const requestedVoiceId =
     typeof body.voiceId === "string" ? body.voiceId.trim() : "";
-  const voiceId =
-    process.env.ELEVENLABS_VOICE_ID?.trim() || requestedVoiceId;
+  const voiceId = process.env.ELEVENLABS_VOICE_ID?.trim() || DEFAULT_VOICE_ID;
   const apiKey = process.env.ELEVENLABS_API_KEY?.trim();
 
   if (!text) {
     sendJson(res, 400, { message: "Text is required." });
+    return;
+  }
+  if (requestedVoiceId && requestedVoiceId !== voiceId) {
+    sendJson(res, 400, { message: "Invalid voice ID supplied." });
     return;
   }
   if (!voiceId) {

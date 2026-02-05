@@ -25,14 +25,33 @@ const sendJson = (res, statusCode, payload) => {
   res.end(JSON.stringify(payload));
 };
 
-const setCorsHeaders = (res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+const resolveAllowedOrigin = (req) => {
+  const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  if (!allowedOrigins.length) {
+    return "";
+  }
+  const requestOrigin = req.headers.origin;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+  return allowedOrigins[0];
+};
+
+const setCorsHeaders = (req, res) => {
+  const allowedOrigin = resolveAllowedOrigin(req);
+  if (allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Vary", "Origin");
+  }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 };
 
 module.exports = async (req, res) => {
-  setCorsHeaders(res);
+  setCorsHeaders(req, res);
   if (req.method === "OPTIONS") {
     res.statusCode = 204;
     res.end();
