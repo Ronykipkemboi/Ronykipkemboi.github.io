@@ -64,12 +64,56 @@ module.exports = async (req, res) => {
   }
 
   const body = await readJsonBody(req);
-  const prompt = typeof body.prompt === "string" ? body.prompt.trim() : "";
-  if (!prompt) {
+  const userPrompt = typeof body.prompt === "string" ? body.prompt.trim() : "";
+  const contextPrompt = typeof body.system === "string" ? body.system.trim() : "";
+  
+  if (!userPrompt) {
     sendJson(res, 400, { message: "Prompt text is required." });
     return;
   }
 
-  const message = `${DEFAULT_MESSAGE} You asked: "${prompt}".`;
-  sendJson(res, 200, { message });
+  const openaiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!openaiKey) {
+    const fallbackResponse = `${DEFAULT_MESSAGE} You asked: "${userPrompt}".`;
+    sendJson(res, 200, { message: fallbackResponse });
+    return;
+  }
+
+  const conversationContext = contextPrompt || 
+    "You are Ronald Kipkemboi. Answer briefly about your skills in React, Java, and full-stack development.";
+
+  let aiResponse;
+  try {
+    const openaiRequest = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${openaiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: conversationContext },
+          { role: "user", content: userPrompt }
+        ],
+        max_tokens: 250,
+        temperature: 0.8,
+      }),
+    });
+
+    if (!openaiRequest.ok) {
+      console.error("OpenAI API error:", openaiRequest.status);
+      const fallbackResponse = `${DEFAULT_MESSAGE} You asked: "${userPrompt}".`;
+      sendJson(res, 200, { message: fallbackResponse });
+      return;
+    }
+
+    const aiData = await openaiRequest.json();
+    aiResponse = aiData.choices?.[0]?.message?.content?.trim() || DEFAULT_MESSAGE;
+  } catch (err) {
+    console.error("Failed to contact OpenAI:", err);
+    aiResponse = `${DEFAULT_MESSAGE} You asked: "${userPrompt}".`;
+  }
+
+  sendJson(res, 200, { message: aiResponse });
 };
