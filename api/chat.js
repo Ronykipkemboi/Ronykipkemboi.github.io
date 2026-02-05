@@ -1,6 +1,12 @@
 const DEFAULT_MESSAGE =
   "Thanks for reaching out! I'm happy to chat about frontend systems, full-stack builds, and projects.";
 
+const FALLBACK_CONTEXT = 
+  "You are Ronald Kipkemboi. Answer briefly about your skills in React, Java, and full-stack development.";
+
+const AI_MAX_TOKENS = 250;
+const AI_TEMPERATURE = 0.8;
+
 const readJsonBody = async (req) => {
   if (req.body) {
     return req.body;
@@ -79,8 +85,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const conversationContext = contextPrompt || 
-    "You are Ronald Kipkemboi. Answer briefly about your skills in React, Java, and full-stack development.";
+  const conversationContext = contextPrompt || FALLBACK_CONTEXT;
 
   let aiResponse;
   try {
@@ -96,8 +101,8 @@ module.exports = async (req, res) => {
           { role: "system", content: conversationContext },
           { role: "user", content: userPrompt }
         ],
-        max_tokens: 250,
-        temperature: 0.8,
+        max_tokens: AI_MAX_TOKENS,
+        temperature: AI_TEMPERATURE,
       }),
     });
 
