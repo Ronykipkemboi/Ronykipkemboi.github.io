@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Basic API key validation - ElevenLabs API keys typically start with "sk_"
+  // Basic API key validation - ElevenLabs API keys should be at least 20 characters
   if (apiKey.length < 20) {
     console.error("ElevenLabs API key appears to be invalid (too short). Please verify ELEVENLABS_API_KEY.");
     sendJson(res, 503, {
@@ -126,12 +126,13 @@ module.exports = async (req, res) => {
 
   if (!response.ok) {
     let errorDetail = {};
+    let errorText = "";
     try {
-      const errorText = await response.text();
+      errorText = await response.text();
       errorDetail = JSON.parse(errorText);
-      console.error("ElevenLabs request failed.", errorText);
+      console.error("ElevenLabs request failed.", JSON.stringify(errorDetail, null, 2));
     } catch (parseError) {
-      console.error("ElevenLabs request failed with status:", response.status);
+      console.error("ElevenLabs request failed with status:", response.status, "Raw response:", errorText);
     }
 
     // Handle specific error cases
