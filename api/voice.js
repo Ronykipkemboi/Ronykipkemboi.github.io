@@ -92,9 +92,9 @@ module.exports = async (req, res) => {
 
   if (!response.ok) {
     const errorText = await response.text();
+    console.error("ElevenLabs request failed.", errorText);
     sendJson(res, response.status, {
       message: "ElevenLabs request failed.",
-      detail: errorText,
     });
     return;
   }
