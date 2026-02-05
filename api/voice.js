@@ -16,7 +16,7 @@ const readJsonBody = async (req) => {
   }
 };
 
-const DEFAULT_VOICE_ID = "N4vsgxqr2U3I2wHhBa9m";
+const DEFAULT_VOICE_ID = "aCo0MjC9VdNNVf8S6sq3";
 
 const sendJson = (res, statusCode, payload) => {
   res.statusCode = statusCode;
