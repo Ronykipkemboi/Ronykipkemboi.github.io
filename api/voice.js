@@ -17,6 +17,7 @@ const readJsonBody = async (req) => {
 };
 
 const DEFAULT_VOICE_ID = "aCo0MjC9VdNNVf8S6sq3";
+const MIN_API_KEY_LENGTH = 20;
 
 const sendJson = (res, statusCode, payload) => {
   res.statusCode = statusCode;
@@ -90,7 +91,7 @@ module.exports = async (req, res) => {
   }
 
   // Basic API key validation - ElevenLabs API keys should be at least 20 characters
-  if (apiKey.length < 20) {
+  if (apiKey.length < MIN_API_KEY_LENGTH) {
     console.error("ElevenLabs API key appears to be invalid (too short). Please verify ELEVENLABS_API_KEY.");
     sendJson(res, 503, {
       message: "Voice service is not properly configured. Please contact the site administrator.",
