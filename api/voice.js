@@ -82,8 +82,18 @@ module.exports = async (req, res) => {
     return;
   }
   if (!apiKey) {
+    console.error("ElevenLabs API key is not configured. Set ELEVENLABS_API_KEY environment variable.");
     sendJson(res, 503, {
       message: "ElevenLabs API key is not configured on the server.",
+    });
+    return;
+  }
+
+  // Basic API key validation - ElevenLabs API keys typically start with "sk_"
+  if (apiKey.length < 20) {
+    console.error("ElevenLabs API key appears to be invalid (too short). Please verify ELEVENLABS_API_KEY.");
+    sendJson(res, 503, {
+      message: "Voice service is not properly configured. Please contact the site administrator.",
     });
     return;
   }
@@ -115,8 +125,27 @@ module.exports = async (req, res) => {
   }
 
   if (!response.ok) {
-    const errorText = await response.text();
-    console.error("ElevenLabs request failed.", errorText);
+    let errorDetail = {};
+    try {
+      const errorText = await response.text();
+      errorDetail = JSON.parse(errorText);
+      console.error("ElevenLabs request failed.", errorText);
+    } catch (parseError) {
+      console.error("ElevenLabs request failed with status:", response.status);
+    }
+
+    // Handle specific error cases
+    if (response.status === 401) {
+      const errorStatus = errorDetail?.detail?.status;
+      if (errorStatus === "invalid_api_key") {
+        console.error("Invalid ElevenLabs API key. Please check the ELEVENLABS_API_KEY environment variable.");
+        sendJson(res, 503, {
+          message: "Voice service is temporarily unavailable. Please contact the site administrator.",
+        });
+        return;
+      }
+    }
+
     sendJson(res, response.status, {
       message: "ElevenLabs request failed.",
     });
