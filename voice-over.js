@@ -83,16 +83,15 @@
       return;
     }
 
-    const voiceId = voiceToggle.dataset.voiceId?.trim();
     const voiceEndpoint = voiceToggle.dataset.voiceEndpoint?.trim();
-    if (voiceId && voiceEndpoint) {
+    if (voiceEndpoint) {
       setVoiceState(true, "Generating voice over...");
       activeRequestController = new AbortController();
       try {
         const response = await fetch(voiceEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, voiceId }),
+          body: JSON.stringify({ text }),
           signal: activeRequestController.signal,
         });
         if (!response.ok) {
