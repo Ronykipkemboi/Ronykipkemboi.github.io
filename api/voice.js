@@ -136,20 +136,18 @@ module.exports = async (req, res) => {
       console.error("ElevenLabs request failed with status:", response.status, "Raw response:", errorText);
     }
 
-    // Handle specific error cases
-    if (response.status === 401) {
-      const errorStatus = errorDetail?.detail?.status;
-      if (errorStatus === "invalid_api_key") {
-        console.error("Invalid ElevenLabs API key. Please check the ELEVENLABS_API_KEY environment variable.");
-        sendJson(res, 503, {
-          message: "Voice service is temporarily unavailable. Please contact the site administrator.",
-        });
-        return;
-      }
+    // Authentication / authorization errors indicate a server-side
+    // misconfiguration — never expose the upstream status to the client.
+    if (response.status === 401 || response.status === 403) {
+      console.error("Invalid ElevenLabs API key. Please check the ELEVENLABS_API_KEY environment variable.");
+      sendJson(res, 503, {
+        message: "Voice service is temporarily unavailable. Please contact the site administrator.",
+      });
+      return;
     }
 
-    sendJson(res, response.status, {
-      message: "ElevenLabs request failed.",
+    sendJson(res, 502, {
+      message: "Voice service encountered an upstream error.",
     });
     return;
   }
