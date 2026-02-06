@@ -184,9 +184,8 @@
     };
 
     const speakWithElevenLabs = async (text) => {
-      const voiceId = assistantWidget.dataset.voiceId?.trim();
       const endpoint = assistantWidget.dataset.voiceEndpoint;
-      if (!voiceId || !endpoint || muted) {
+      if (!endpoint || muted) {
         return;
       }
       setWaveformState(true);
@@ -195,7 +194,7 @@
         response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, voiceId }),
+          body: JSON.stringify({ text }),
         });
       } catch (error) {
         setWaveformState(false);
