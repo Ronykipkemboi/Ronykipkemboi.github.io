@@ -136,8 +136,8 @@ module.exports = async (req, res) => {
       console.error("ElevenLabs request failed with status:", response.status, "Raw response:", errorText);
     }
 
-    // Authentication / authorisation errors indicate a server-side
-    // mis-configuration — never expose the upstream status to the client.
+    // Authentication / authorization errors indicate a server-side
+    // misconfiguration — never expose the upstream status to the client.
     if (response.status === 401 || response.status === 403) {
       console.error("Invalid ElevenLabs API key. Please check the ELEVENLABS_API_KEY environment variable.");
       sendJson(res, 503, {
