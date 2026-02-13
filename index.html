@@ -192,8 +192,6 @@
           class="btn"
           type="button"
           aria-pressed="false"
-          data-voice-id="aCo0MjC9VdNNVf8S6sq3"
-          data-voice-endpoint="/api/voice"
         >
           Start Voice Over
         </button>
@@ -201,13 +199,11 @@
       </div>
     </footer>
 
-    <!-- Voice synthesis requires a configured data-voice-id and /api/voice endpoint. -->
+    <!-- Voice synthesis uses browser's built-in speech synthesis API -->
     <section
       class="assistant-widget"
       aria-label="Digital twin assistant"
-      data-voice-id="aCo0MjC9VdNNVf8S6sq3"
       data-chat-endpoint="/api/chat"
-      data-voice-endpoint="/api/voice"
       data-system-prompt="You are Ronald Kipkemboi, a CS Student-Athlete at Shaw University skilled in React, Java, and AV Tech."
     >
       <div class="assistant-card">
